@@ -250,7 +250,7 @@
 
       try {
         // Send to Formspree (works without Netlify functions)
-        const res = await fetch('https://formspree.io/david@rapidqs.com', {
+        const res = await fetch('http://76.13.182.146:8765/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
           body: JSON.stringify({ name, email, country, region, project })
