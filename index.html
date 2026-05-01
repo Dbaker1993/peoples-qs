@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The People's QS — Nominate Your Overspend</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .hat {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      margin-bottom: 16px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .badge {
+      display: inline-block;
+      background: #cc0000;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    h1 span {
+      color: #cc0000;
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .form-card {
+      background: #141414;
+      border: 1px solid #222;
+      border-radius: 16px;
+      padding: 36px 32px;
+      text-align: left;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 8px;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      color: #fff;
+      font-size: 15px;
+      font-family: inherit;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #cc0000;
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #444;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .row { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+      .form-card { padding: 24px 20px; }
+      .hat { width: 120px; height: 120px; display: block !important; visibility: visible !important; }
+    }
+
+    .btn {
+      width: 100%;
+      background: #cc0000;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.1s;
+      margin-top: 8px;
+    }
+
+    .btn:hover { background: #e60000; }
+    .btn:active { transform: scale(0.98); }
+    .btn:disabled { background: #444; cursor: not-allowed; }
+
+    .small {
+      font-size: 12px;
+      color: #555;
+      text-align: center;
+      margin-top: 14px;
+    }
+
+    .success {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success .check { font-size: 56px; margin-bottom: 16px; }
+    .success h2 { font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .success p { color: #888; font-size: 15px; line-height: 1.6; }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 12px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img class="hat" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj4KICA8IS0tIEhhcmQgaGF0IGJvZHkgLS0+CiAgPGVsbGlwc2UgY3g9IjEwMCIgY3k9IjEzMCIgcng9Ijg1IiByeT0iMjAiIGZpbGw9IiNjYzAwMDAiLz4KICA8IS0tIEhhdCBkb21lIC0tPgogIDxwYXRoIGQ9Ik0gMzAgMTMwIFEgMzAgNjAgMTAwIDU1IFEgMTcwIDYwIDE3MCAxMzAgWiIgZmlsbD0iI2NjMDAwMCIvPgogIDwhLS0gSGF0IGJyaW0gLS0+CiAgPHJlY3QgeD0iMTUiIHk9IjEyMiIgd2lkdGg9IjE3MCIgaGVpZ2h0PSIxNiIgcng9IjgiIGZpbGw9IiNhYTAwMDAiLz4KICA8IS0tIEhpZ2hsaWdodCAtLT4KICA8cGF0aCBkPSJNIDYwIDgwIFEgODAgNjUgMTIwIDcwIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4zKSIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8IS0tIFN0cmFwIGdyb292ZSAtLT4KICA8cmVjdCB4PSI4OCIgeT0iNTUiIHdpZHRoPSIyNCIgaGVpZ2h0PSIxMiIgcng9IjMiIGZpbGw9IiNhYTAwMDAiLz4KPC9zdmc+Cg==" alt="The QS Guy Red Hat" />
+    <div class="badge">The People's QS</div>
+    <h1><span>Nominate Your Council</span><br>or Government Overspend</h1>
+    <p class="subtitle">
+      Sick of watching your taxes disappear into black holes?<br>
+      Submit it. I'll reprice it live — and nobody is safe.
+    </p>
+
+    <div class="form-card">
+      <div id="form-wrap">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="name" placeholder="John Smith" />
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="john@example.com" />
+        </div>
+
+        <div class="row">
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" id="country" placeholder="UK, Australia, NZ…" />
+          </div>
+          <div class="form-group">
+            <label>Region / County</label>
+            <input type="text" id="region" placeholder="London, Kent, NSW…" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Project &amp; Council / Government Body</label>
+          <textarea id="project" placeholder="Name the project, council or government body. What was the original budget? What did it actually cost? Any links or news articles welcome."></textarea>
+        </div>
+
+        <button class="btn" id="submit-btn" onclick="submitForm()">
+          🎩 Nominate Your Overspend
+        </button>
+
+        <p class="small">No spam. Ever. Just global accountability — one roast at a time.</p>
+      </div>
+
+      <div class="success" id="success-msg">
+        <div class="check">✅</div>
+        <h2>Nominated. Nobody is safe.</h2>
+        <p>Your submission is in the queue.<br>Follow <strong>@TheQSGuy</strong> to see if yours gets roasted.</p>
+      </div>
+    </div>
+
+    <p class="footer">© The People's QS — Global Accountability in Construction</p>
+  </div>
+
+  <script>
+    async function submitForm() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const country = document.getElementById('country').value.trim();
+      const region = document.getElementById('region').value.trim();
+      const project = document.getElementById('project').value.trim();
+
+      if (!name || !email || !project) {
+        alert('Please fill in your name, email, and project details.');
+        return;
+      }
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'Submitting…';
+
+      try {
+        const res = await fetch('/.netlify/functions/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, country, region, project })
+        });
+
+        if (!res.ok) throw new Error('Server error');
+
+        document.getElementById('form-wrap').style.display = 'none';
+        document.getElementById('success-msg').style.display = 'block';
+
+      } catch (e) {
+        alert('Something went wrong. Please try again.');
+        btn.disabled = false;
+        btn.textContent = '🎩 Nominate Your Overspend';
+      }
+    }
+  </script>
+</body>
+</html>
