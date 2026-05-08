@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The People's QS — Nominate Your Council or Government Overspend</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0a0a0a;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px 80px;
+  }
+  .hat-img { font-size: 80px; margin-bottom: 24px; }
+  .badge {
+    background: #e53e3e;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.2;
+    max-width: 600px;
+    margin-bottom: 18px;
+  }
+  h1 .red { color: #e53e3e; }
+  .subtitle {
+    text-align: center;
+    color: #aaa;
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin-bottom: 48px;
+  }
+  form {
+    background: #161616;
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 6px;
+    display: block;
+  }
+  input, textarea {
+    width: 100%;
+    background: #0a0a0a;
+    border: 1px solid #2a2a2a;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: #444; }
+  input:focus, textarea:focus { border-color: #e53e3e; }
+  textarea { min-height: 120px; resize: vertical; }
+  .field { display: flex; flex-direction: column; }
+  button {
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  button:hover { background: #c53030; }
+  button:disabled { background: #555; cursor: not-allowed; }
+  .success-msg {
+    display: none;
+    text-align: center;
+    color: #68d391;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 20px;
+  }
+  .error-msg {
+    display: none;
+    text-align: center;
+    color: #fc8181;
+    font-size: 14px;
+    margin-top: -8px;
+  }
+  footer {
+    margin-top: 48px;
+    color: #444;
+    font-size: 13px;
+    text-align: center;
+  }
+  footer a { color: #666; text-decoration: none; }
+  footer a:hover { color: #aaa; }
+</style>
+</head>
+<body>
+
+<div class="hat-img">&#127913;</div>
+<div class="badge">The People's QS</div>
+
+<h1><span class="red">Nominate Your Council</span><br>or Government Overspend</h1>
+<p class="subtitle">Sick of watching your taxes disappear into black holes?<br>Submit it. I'll reprice it live &#8212; and nobody is safe.</p>
+
+<form id="nominationForm">
+  <div class="field">
+    <label>Your Name</label>
+    <input type="text" name="name" placeholder="John Smith" required>
+  </div>
+  <div class="field">
+    <label>Email Address</label>
+    <input type="email" name="email" placeholder="john@example.com" required>
+  </div>
+  <div class="field">
+    <label>Country</label>
+    <input type="text" name="country" placeholder="UK, Australia, NZ...">
+  </div>
+  <div class="field">
+    <label>Region / County</label>
+    <input type="text" name="region" placeholder="London, Kent, NSW...">
+  </div>
+  <div class="field">
+    <label>What Was Overspent? Tell Me Everything.</label>
+    <textarea name="project" placeholder="Council quoted &#163;2.4M for a car park that should cost &#163;400k..." required></textarea>
+  </div>
+  <button type="submit" id="submitBtn">Submit Nomination &#8594;</button>
+  <div class="success-msg" id="successMsg">&#9989; Nomination received! I'll be in touch.</div>
+  <div class="error-msg" id="errorMsg"></div>
+</form>
+
+<footer>
+  <p>Powered by <a href="https://rapidqs.co.uk" target="_blank">RapidQS</a> &#8212; Professional Quantity Surveying</p>
+</footer>
+
+<script>
+document.getElementById('nominationForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('submitBtn');
+  var successMsg = document.getElementById('successMsg');
+  var errorMsg = document.getElementById('errorMsg');
+  
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+  errorMsg.style.display = 'none';
+
+  var data = {
+    name:    this.querySelector('[name=name]').value,
+    email:   this.querySelector('[name=email]').value,
+    country: this.querySelector('[name=country]').value,
+    region:  this.querySelector('[name=region]').value,
+    project: this.querySelector('[name=project]').value
+  };
+
+  try {
+    var response = await fetch('https://formsubmit.co/ajax/david@rapidqs.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'New Peoples QS Nomination: ' + (data.region || data.country) + ' \u2014 ' + data.name,
+        _template: 'table',
+        name: data.name,
+        email: data.email,
+        country: data.country,
+        region: data.region,
+        project: data.project
+      })
+    });
+    var result = await response.json();
+    if (result.success === 'true' || result.success === true || response.ok) {
+      this.style.display = 'none';
+      successMsg.style.display = 'block';
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Nomination \u2192';
+    errorMsg.textContent = 'Something went wrong. Please try again or email david@rapidqs.com directly.';
+    errorMsg.style.display = 'block';
+  }
+});
+</script>
+
+</body>
+</html>
